@@ -38,8 +38,10 @@ var app = {
         } else if (cell.id === `x-${app.player.positionX}-y-${app.player.positionY}`) {
           var playerDiv = document.createElement('div');
           playerDiv.classList.add('player');
+          playerDiv.classList.add(app.player.direction);
           cell.appendChild(playerDiv);
         }
+
         // put cell in row
         row.appendChild(cell);
       }
@@ -53,6 +55,26 @@ var app = {
   redrawBoard: function () {
     app.clearBoard();
     app.drawBoard(app.nbOfRows, app.nbOfCells);
+  },
+  turnLeft: function () {
+    console.log(app.player.direction);
+    if (app.player.direction === 'right') {
+      app.player.direction = 'up';
+      console.log(app.player.direction);
+    } else if (app.player.direction === 'down') {
+      app.player.direction = 'right';
+      console.log(app.player.direction);
+    } else if (app.player.direction === 'left') {
+      app.player.direction = 'down';
+      console.log(app.player.direction);
+    } else if (app.player.direction === 'up') {
+      app.player.direction = 'left';
+      console.log(app.player.direction);
+    }
+    app.redrawBoard();
+  },
+  turnRight: function () {
+    alert('Dear user, this feature is not available yet, please, use turnLeft().';)
   },
 };
 
