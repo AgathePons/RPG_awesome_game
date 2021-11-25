@@ -20,7 +20,7 @@ var app = {
         app.moveForward();
       } else if (e.key === 'ArrowLeft') {
         app.turnLeft();
-      } else if (e.key === 'Arrowright') {
+      } else if (e.key === 'ArrowRight') {
         app.turnRight();
       }
     });
@@ -84,7 +84,7 @@ var app = {
     app.redrawBoard();
   },
   turnRight: function () {
-    console.log('Dear user, this feature is not available yet, please, use turnLeft().');
+    alert('Dear user, this feature is not available yet, please, use the left arrow three times instead.');
   },
   moveForward: function () {
     if ((app.player.direction === 'right') && (app.player.positionX < app.nbOfCells - 1)) {
