@@ -11,3 +11,22 @@ body {
 
   margin: 20px;
 }
+
+#board {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#board > .row {
+  display: flex;
+}
+
+#board > .row > .cell {
+  width: 70px;
+  height: 70px;
+  border: 1px solid #000;
+}
