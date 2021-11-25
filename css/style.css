@@ -30,3 +30,7 @@ body {
   height: 70px;
   border: 1px solid #000;
 }
+
+#board > .row > .cell.targetCell {
+  background-color: #00ff00;
+}
