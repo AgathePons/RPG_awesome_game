@@ -74,7 +74,23 @@ var app = {
     app.redrawBoard();
   },
   turnRight: function () {
-    alert('Dear user, this feature is not available yet, please, use turnLeft().';)
+    alert('Dear user, this feature is not available yet, please, use turnLeft().');
+  },
+  moveForward: function () {
+    if ((app.player.direction === 'right') && (app.player.positionX <= app.nbOfCells)) {
+      app.player.positionX++;
+      console.log(app.player.positionX);
+    } else if ((app.player.direction === 'left') && (app.player.positionX > 0)) {
+      app.player.positionX--;
+      console.log(app.player.positionX);
+    } else if ((app.player.direction === 'up') && (app.player.positionY > 0)) {
+      app.player.positionY--;
+      console.log(app.player.positionY);
+    } else if ((app.player.direction === 'down') && (app.player.positionY <= app.nbOfRows)) {
+      app.player.positionY++;
+      console.log(app.player.positionY);
+    }
+    app.redrawBoard();
   },
 };
 
