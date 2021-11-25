@@ -1,4 +1,6 @@
 var app = {
+  nbOfRows: 4,
+  nbOfCells: 7,
   player: {
     positionX: 0,
     positionY: 0,
@@ -11,7 +13,7 @@ var app = {
   board: document.getElementById('board'),
 
   init: function () {
-    app.drawBoard(4, 6);
+    app.drawBoard(app.nbOfRows, app.nbOfCells);
   },
 
   /**
@@ -20,10 +22,11 @@ var app = {
    * @param {number} nbOfCells 
    */
   drawBoard: function (nbOfRows, nbOfCells) {
+    // build rows
     for (var iRows = 0; iRows < nbOfRows; iRows++) {
       var row = document.createElement('div');
       row.classList.add('row');
-
+      // build cells
       for (var iCells = 0; iCells < nbOfCells; iCells++) {
         var cell = document.createElement('div');
         cell.classList.add('cell');
@@ -37,12 +40,19 @@ var app = {
           playerDiv.classList.add('player');
           cell.appendChild(playerDiv);
         }
-
+        // put cell in row
         row.appendChild(cell);
       }
-
+      // put row in board in DOM
       app.board.appendChild(row);
     }
+  },
+  clearBoard: function () {
+    app.board.innerHTML = '';
+  },
+  redrawBoard: function () {
+    app.clearBoard();
+    app.drawBoard(app.nbOfRows, app.nbOfCells);
   },
 };
 
