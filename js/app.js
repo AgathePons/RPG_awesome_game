@@ -1,6 +1,6 @@
 var app = {
   nbOfRows: 4,
-  nbOfCells: 7,
+  nbOfCells: 6,
   player: {
     positionX: 0,
     positionY: 0,
@@ -14,6 +14,16 @@ var app = {
 
   init: function () {
     app.drawBoard(app.nbOfRows, app.nbOfCells);
+    // event on key up
+    document.addEventListener('keyup', function(e) {
+      if (e.key === 'ArrowUp') {
+        app.moveForward();
+      } else if (e.key === 'ArrowLeft') {
+        app.turnLeft();
+      } else if (e.key === 'Arrowright') {
+        app.turnRight();
+      }
+    });
   },
 
   /**
@@ -74,10 +84,10 @@ var app = {
     app.redrawBoard();
   },
   turnRight: function () {
-    alert('Dear user, this feature is not available yet, please, use turnLeft().');
+    console.log('Dear user, this feature is not available yet, please, use turnLeft().');
   },
   moveForward: function () {
-    if ((app.player.direction === 'right') && (app.player.positionX <= app.nbOfCells)) {
+    if ((app.player.direction === 'right') && (app.player.positionX < app.nbOfCells - 1)) {
       app.player.positionX++;
       console.log(app.player.positionX);
     } else if ((app.player.direction === 'left') && (app.player.positionX > 0)) {
@@ -86,7 +96,7 @@ var app = {
     } else if ((app.player.direction === 'up') && (app.player.positionY > 0)) {
       app.player.positionY--;
       console.log(app.player.positionY);
-    } else if ((app.player.direction === 'down') && (app.player.positionY <= app.nbOfRows)) {
+    } else if ((app.player.direction === 'down') && (app.player.positionY < app.nbOfRows - 1)) {
       app.player.positionY++;
       console.log(app.player.positionY);
     }
