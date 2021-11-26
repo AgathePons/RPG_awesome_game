@@ -1,6 +1,7 @@
-var app = {
+const app = {
   nbOfRows: 4,
   nbOfCells: 6,
+  board: null,// definit à null au cas ou le script charge avant le html (script dans le head par ex), on lui donne sa vraie valeur dans init(), car init() est lancée une fois le html chargé via 'DOMContentLoaded'
   player: {
     positionX: 0,
     positionY: 0,
@@ -10,9 +11,9 @@ var app = {
     positionX: 5,
     positionY: 3,
   },
-  board: document.getElementById('board'),
-
-  init: function () {
+  
+  init: () => {
+    app.board = document.getElementById('board');
     app.drawBoard(app.nbOfRows, app.nbOfCells);
     // event on key up
     document.addEventListener('keyup', function(e) {
@@ -31,14 +32,14 @@ var app = {
    * @param {number} nbOfRows 
    * @param {number} nbOfCells 
    */
-  drawBoard: function (nbOfRows, nbOfCells) {
+  drawBoard: (nbOfRows, nbOfCells) => {
     // build rows
-    for (var iRows = 0; iRows < nbOfRows; iRows++) {
-      var row = document.createElement('div');
+    for (let iRows = 0; iRows < nbOfRows; iRows++) {
+      const row = document.createElement('div');
       row.classList.add('row');
       // build cells
-      for (var iCells = 0; iCells < nbOfCells; iCells++) {
-        var cell = document.createElement('div');
+      for (let iCells = 0; iCells < nbOfCells; iCells++) {
+        const cell = document.createElement('div');
         cell.classList.add('cell');
         cell.id = `x-${iCells}-y-${iRows}`;
 
@@ -46,7 +47,7 @@ var app = {
         if (cell.id === `x-${app.targetCell.positionX}-y-${app.targetCell.positionY}`) {
           cell.classList.add('targetCell');
         } else if (cell.id === `x-${app.player.positionX}-y-${app.player.positionY}`) {
-          var playerDiv = document.createElement('div');
+          const playerDiv = document.createElement('div');
           playerDiv.classList.add('player');
           playerDiv.classList.add(app.player.direction);
           cell.appendChild(playerDiv);
@@ -59,14 +60,14 @@ var app = {
       app.board.appendChild(row);
     }
   },
-  clearBoard: function () {
+  clearBoard: () => {
     app.board.innerHTML = '';
   },
-  redrawBoard: function () {
+  redrawBoard: () => {
     app.clearBoard();
     app.drawBoard(app.nbOfRows, app.nbOfCells);
   },
-  turnLeft: function () {
+  turnLeft: () => {
     console.log(app.player.direction);
     if (app.player.direction === 'right') {
       app.player.direction = 'up';
@@ -83,10 +84,10 @@ var app = {
     }
     app.redrawBoard();
   },
-  turnRight: function () {
+  turnRight: () => {
     alert('Dear user, this feature is not available yet, please, use the left arrow three times instead.');
   },
-  moveForward: function () {
+  moveForward: () => {
     if ((app.player.direction === 'right') && (app.player.positionX < app.nbOfCells - 1)) {
       app.player.positionX++;
       console.log(app.player.positionX);
