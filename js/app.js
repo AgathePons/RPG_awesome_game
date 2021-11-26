@@ -1,5 +1,5 @@
 const app = {
-  nbOfRows: 4,
+  nbOfRows: 6,
   nbOfCells: 6,
   board: null,// definit à null au cas ou le script charge avant le html (script dans le head par ex), on lui donne sa vraie valeur dans init(), car init() est lancée une fois le html chargé via 'DOMContentLoaded'
   player: {
@@ -41,16 +41,15 @@ const app = {
       for (let iCells = 0; iCells < nbOfCells; iCells++) {
         const cell = document.createElement('div');
         cell.classList.add('cell');
-        cell.id = `x-${iCells}-y-${iRows}`;
 
-        // check cells coordinates to position targetCell and player div
-        if (cell.id === `x-${app.targetCell.positionX}-y-${app.targetCell.positionY}`) {
-          cell.classList.add('targetCell');
-        } else if (cell.id === `x-${app.player.positionX}-y-${app.player.positionY}`) {
+        // compare iRows/iCells to positionX / positionY of targetCell and player
+        if ((iRows === app.player.positionY) && (iCells === app.player.positionX)) {
           const playerDiv = document.createElement('div');
           playerDiv.classList.add('player');
           playerDiv.classList.add(app.player.direction);
           cell.appendChild(playerDiv);
+        } else if ((iRows === app.targetCell.positionY) && (iCells === app.targetCell.positionX)) {
+          cell.classList.add('targetCell');
         }
 
         // put cell in row
