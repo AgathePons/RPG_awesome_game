@@ -1,7 +1,7 @@
 const app = {
   nbOfRows: 6,
   nbOfCells: 6,
-  board: null,// definit à null au cas ou le script charge avant le html (script dans le head par ex), on lui donne sa vraie valeur dans init(), car init() est lancée une fois le html chargé via 'DOMContentLoaded'
+  board: null, // definit à null au cas ou le script charge avant le html (script dans le head par ex), on lui donne sa vraie valeur dans init(), car init() est lancée une fois le html chargé via 'DOMContentLoaded'
   player: {
     positionX: 0,
     positionY: 0,
@@ -11,12 +11,12 @@ const app = {
     positionX: 5,
     positionY: 3,
   },
-  
+
   init: () => {
     app.board = document.getElementById('board');
     app.drawBoard(app.nbOfRows, app.nbOfCells);
     // event on key up
-    document.addEventListener('keyup', function(e) {
+    document.addEventListener('keyup', function (e) {
       if (e.key === 'ArrowUp') {
         app.moveForward();
       } else if (e.key === 'ArrowLeft') {
@@ -59,32 +59,46 @@ const app = {
       app.board.appendChild(row);
     }
   },
-  clearBoard: () => {
-    app.board.innerHTML = '';
-  },
+  clearBoard: () => app.board.innerHTML = '',
   redrawBoard: () => {
     app.clearBoard();
     app.drawBoard(app.nbOfRows, app.nbOfCells);
   },
   turnLeft: () => {
     console.log(app.player.direction);
-    if (app.player.direction === 'right') {
+    switch (app.player.direction) {
+    case 'right':
       app.player.direction = 'up';
-      console.log(app.player.direction);
-    } else if (app.player.direction === 'down') {
+      break;
+    case 'down':
       app.player.direction = 'right';
-      console.log(app.player.direction);
-    } else if (app.player.direction === 'left') {
+      break;
+    case 'left':
       app.player.direction = 'down';
-      console.log(app.player.direction);
-    } else if (app.player.direction === 'up') {
+      break;
+    case 'up':
       app.player.direction = 'left';
-      console.log(app.player.direction);
+      break;
     }
     app.redrawBoard();
   },
   turnRight: () => {
-    alert('Dear user, this feature is not available yet, please, use the left arrow three times instead.');
+    console.log(app.player.direction);
+    switch (app.player.direction) {
+    case 'right':
+      app.player.direction = 'down';
+      break;
+    case 'down':
+      app.player.direction = 'left';
+      break;
+    case 'left':
+      app.player.direction = 'up';
+      break;
+    case 'up':
+      app.player.direction = 'right';
+      break;
+    }
+    app.redrawBoard();
   },
   moveForward: () => {
     if ((app.player.direction === 'right') && (app.player.positionX < app.nbOfCells - 1)) {
