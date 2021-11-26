@@ -11,6 +11,7 @@ const app = {
     positionX: 5,
     positionY: 3,
   },
+  gameOver: false,
 
   init: () => {
     app.board = document.getElementById('board');
@@ -116,6 +117,9 @@ const app = {
     }
     app.redrawBoard();
   },
+  isGameOver: () => {
+    
+  }
 };
 
 document.addEventListener('DOMContentLoaded', app.init);
